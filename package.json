@@ -1,0 +1,43 @@
+{
+  "name": "balam-website",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postbuild": "node -e \"const fs=require('fs');fs.copyFileSync('build/index.html','build/404.html');\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.5",
+    "@mui/material": "^7.3.5",
+    "framer-motion": "^12.23.24",
+    "react-router-dom": "^7.9.4",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^5.1.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
