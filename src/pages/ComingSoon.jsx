@@ -75,7 +75,7 @@ const ComingSoon = () => (
           fontFamily: 'Orbitron, sans-serif',
         }}
       >
-        Esta sección estará disponible pronto...
+        Nuestro equipo está trabajando arduamente para traerte esta sección pronto...
       </Typography>
 
       <motion.div whileHover={{ scale: 1.05 }}>

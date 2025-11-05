@@ -83,7 +83,7 @@ const LandingPage = () => {
               mb: 3,
             }}
           >
-            Pagina oficial del equipo de robótica BALAM 3527
+            Pagina oficial del equipo de robótica de Prepatec Esmeralda
           </Typography>
 
           <Typography
