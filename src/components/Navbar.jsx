@@ -40,6 +40,13 @@ const Navbar = () => {
     { label: "Patrocinios", to: "/sponsors" },
   ];
 
+  // Special event buttons (can be updated dynamically)
+  const specialEvents = [
+    { label: "RIFA BALAM", to: "/rifa-balam", active: false },
+    { label: "GET-UP TEC", to: "/get-up-tec", active: false },
+    { label: "ROBOTICS CAMP", to: "/robotic-camp", active: false },
+  ].filter(event => event.active); // Only include active events
+
   return (
     <>
       <HideOnScroll>
@@ -86,6 +93,37 @@ const Navbar = () => {
               </motion.div>
             </Box>
 
+            {/* Left side: Special Event Buttons */}
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              {specialEvents.map((event, index) => (
+                <motion.div key={index} whileHover={{ scale: 1.05, y: -1 }}>
+                  <Button
+                    color="inherit"
+                    component={Link}
+                    to={event.to}
+                    sx={{
+                      color: "#00f7ffff", // Bold color to attract attention
+                      fontWeight: 700,
+                      fontSize: "0.9rem",
+                      px: 2,
+                      py: 0.5,
+                      textTransform: "uppercase",
+                      background: "linear-gradient(90deg, #00a2ffff, #ffcc00)",
+                      borderRadius: "999px",
+                      boxShadow: "0 0 15px rgba(144, 0, 255, 0.7)",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        background: "linear-gradient(90deg, #007bffff, #ff5f00)",
+                        boxShadow: "0 0 25px rgba(191, 0, 255, 0.9)",
+                      },
+                    }}
+                  >
+                    {event.label}
+                  </Button>
+                </motion.div>
+              ))}
+            </Box>
+
             {/* Desktop menu */}
             <Box
               sx={{
@@ -115,8 +153,7 @@ const Navbar = () => {
                         bottom: 0,
                         width: 0,
                         height: "2px",
-                        background:
-                          "linear-gradient(90deg, #00e5ff, #00bfff)",
+                        background: "linear-gradient(90deg, #00e5ff, #00bfff)",
                         transition: "width 0.3s ease",
                       },
                       "&:hover::after": { width: "100%" },
@@ -139,15 +176,13 @@ const Navbar = () => {
                     fontWeight: 700,
                     letterSpacing: 1,
                     color: "#0a0a0f",
-                    background:
-                      "linear-gradient(90deg, #00e5ff, #00bfff)",
+                    background: "linear-gradient(90deg, #00e5ff, #00bfff)",
                     borderRadius: "999px",
                     boxShadow: "0 0 12px rgba(0, 191, 255, 0.7)",
                     textTransform: "uppercase",
                     transition: "all 0.3s ease",
                     "&:hover": {
-                      background:
-                        "linear-gradient(90deg, #00ffff, #33aaff)",
+                      background: "linear-gradient(90deg, #00ffff, #33aaff)",
                       boxShadow: "0 0 25px rgba(0, 191, 255, 0.9)",
                     },
                   }}
@@ -216,14 +251,12 @@ const Navbar = () => {
                 mt: 1,
                 fontWeight: 700,
                 justifyContent: "center",
-                background:
-                  "linear-gradient(90deg, #00e5ff, #00bfff)",
+                background: "linear-gradient(90deg, #00e5ff, #00bfff)",
                 color: "#0a0a0f",
                 borderRadius: "999px",
                 mx: 2,
                 "&:hover": {
-                  background:
-                    "linear-gradient(90deg, #00ffff, #33aaff)",
+                  background: "linear-gradient(90deg, #00ffff, #33aaff)",
                   boxShadow: "0 0 20px rgba(0, 191, 255, 0.9)",
                 },
               }}

@@ -19,25 +19,25 @@ const AboutUs = () => {
     >
       {/* Video background */}
       <Box
-  component="video"
-  src={Movie}
-  autoPlay
-  loop
-  muted
-  playsInline
-  sx={{
-    position: "fixed", // use fixed so it always covers the viewport
-    top: 0,
-    left: 0,
-    width: "100vw",
-    height: "100vh",
-    objectFit: "cover",
-    zIndex: 0,
-    opacity: 0.45,
-    margin: 0,
-    padding: 0,
-  }}
-/>
+        component="video"
+        src={Movie}
+        autoPlay
+        loop
+        muted
+        playsInline
+        sx={{
+          position: "fixed", // use fixed so it always covers the viewport
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          objectFit: "cover",
+          zIndex: 0,
+          opacity: 0.45,
+          margin: 0,
+          padding: 0,
+        }}
+      />
 
 
       {/* Ambient gradients */}
@@ -101,7 +101,7 @@ const AboutUs = () => {
             la tecnología y el trabajo en equipo. Desde <strong>2011</strong> participamos en la
             competencia internacional <strong>FIRST Robotics Competition (FRC)</strong>, donde
             estudiantes de preparatoria diseñan, construyen y programan robots para competir en
-            desafíos de ingeniería a nivel mundial.  
+            desafíos de ingeniería a nivel mundial.
             <br /><br />
             Formamos parte del <strong>Tecnológico de Monterrey – PrepaTec Sede Esmeralda</strong>, en el
             <strong> Estado de México</strong>, y cada temporada trabajamos para inspirar a más jóvenes a
@@ -121,6 +121,10 @@ const AboutUs = () => {
               text: 'Diseñamos, construimos y programamos robots para competir en FRC, además de realizar proyectos de impacto social y talleres STEM en nuestra comunidad.',
             },
             {
+              title: '¿Qué es FRC?',
+              text: 'FIRST Robotics Competition (FRC) es una competencia internacional donde equipos de estudiantes de preparatoria diseñan y construyen robots para enfrentar desafíos de ingeniería cada año.',
+            },
+            {
               title: 'Logros',
               text: 'A lo largo de los años, hemos participado en múltiples competencias nacionales e internacionales, obteniendo premios por diseño, innovación y trabajo en equipo.',
             },
@@ -128,6 +132,10 @@ const AboutUs = () => {
               title: 'Nuestros valores',
               text: 'Respeto, innovación, perseverancia y colaboración. Creemos que cada miembro tiene algo único que aportar, y juntos hacemos de BALAM una gran familia.',
             },
+            {
+              title: 'Nuestras meta',
+              text: 'Seguir creciendo como equipo, inspirar a más jóvenes a unirse al mundo STEM y continuar dejando huella en la comunidad de robótica a nivel nacional e internacional.',
+            }
           ].map((item, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
               <motion.div
@@ -180,73 +188,73 @@ const AboutUs = () => {
           “More than robots — building the future, one idea at a time.”
         </Typography>
 
-          {/* Social Media Section */}
-            <Box
+        {/* Social Media Section */}
+        <Box
+          sx={{
+            mt: 10,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          <Typography
+            variant="h5"
             sx={{
-                mt: 10,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 2,
+              color: "#00BFFF",
+              fontFamily: "Orbitron, sans-serif",
+              mb: 2,
+              textShadow: "0 0 20px rgba(0,191,255,0.6)",
+              letterSpacing: 1,
             }}
-            >
-            <Typography
-                variant="h5"
-                sx={{
-                color: "#00BFFF",
-                fontFamily: "Orbitron, sans-serif",
-                mb: 2,
-                textShadow: "0 0 20px rgba(0,191,255,0.6)",
-                letterSpacing: 1,
-                }}
-            >
-                Síguenos en nuestras redes
-            </Typography>
+          >
+            Síguenos en nuestras redes
+          </Typography>
 
-            <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap", justifyContent: "center" }}>
-                {[
-                { name: "Instagram", icon: "mdi:instagram", url: "https://www.instagram.com/balam_3527/" },
-                { name: "TikTok", icon: "ic:baseline-tiktok", url: "https://www.tiktok.com/@balam_3527" },
-                { name: "Facebook", icon: "ic:baseline-facebook", url: "https://www.facebook.com/tecbalam3527" },
-                { name: "YouTube", icon: "mdi:youtube", url: "https://www.youtube.com/@TecBalamZE/videos" },
-                { name: "Gmail", icon: "mdi:gmail", url: "mailto:balam3527@gmail.com" },
-                ].map((social, i) => (
-                <motion.a
-                    key={i}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.2, y: -4 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    style={{
-                    color: "#a8cfff",
-                    textDecoration: "none",
-                    }}
+          <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap", justifyContent: "center" }}>
+            {[
+              { name: "Instagram", icon: "mdi:instagram", url: "https://www.instagram.com/balam_3527/" },
+              { name: "TikTok", icon: "ic:baseline-tiktok", url: "https://www.tiktok.com/@balam_3527" },
+              { name: "Facebook", icon: "ic:baseline-facebook", url: "https://www.facebook.com/tecbalam3527" },
+              { name: "YouTube", icon: "mdi:youtube", url: "https://www.youtube.com/@TecBalamZE/videos" },
+              { name: "Gmail", icon: "mdi:gmail", url: "mailto:balam3527@gmail.com" },
+            ].map((social, i) => (
+              <motion.a
+                key={i}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, y: -4 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                style={{
+                  color: "#a8cfff",
+                  textDecoration: "none",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: 60,
+                    height: 60,
+                    borderRadius: "50%",
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(0,191,255,0.3)",
+                    boxShadow: "0 0 15px rgba(0,191,255,0.2)",
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      background: "linear-gradient(135deg, #00e5ff, #00bfff)",
+                      boxShadow: "0 0 25px rgba(0,191,255,0.8)",
+                    },
+                  }}
                 >
-                    <Box
-                    sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        width: 60,
-                        height: 60,
-                        borderRadius: "50%",
-                        background: "rgba(255,255,255,0.05)",
-                        border: "1px solid rgba(0,191,255,0.3)",
-                        boxShadow: "0 0 15px rgba(0,191,255,0.2)",
-                        transition: "all 0.3s ease",
-                        "&:hover": {
-                        background: "linear-gradient(135deg, #00e5ff, #00bfff)",
-                        boxShadow: "0 0 25px rgba(0,191,255,0.8)",
-                        },
-                    }}
-                    >
-                    <Icon icon={social.icon} width="28" height="28" />
-                    </Box>
-                </motion.a>
-                ))}
-            </Box>
-            </Box>
+                  <Icon icon={social.icon} width="28" height="28" />
+                </Box>
+              </motion.a>
+            ))}
+          </Box>
+        </Box>
 
 
       </Container>

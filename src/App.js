@@ -45,7 +45,7 @@ function App() {
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/history/:year" element={<HistoryYearPage />} />
           <Route path="/projects" element={<ComingSoon />} />
-          <Route path="/sponsors" element={<SponsorsPage />} />
+          <Route path="/sponsors" element={<ComingSoon />} />
           <Route path="/join" element={<JoinUs />} />
           <Route path="/contact" element={<ComingSoon />} />
           <Route path="*" element={<NotFound />} />

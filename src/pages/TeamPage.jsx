@@ -15,15 +15,26 @@ const TeamPage = () => {
           name: "Team Robot",
           members: [
             { name: "Ivanna", role: "Lead Mecánico", photo: "" },
+            { name: "Connie", role: "Constructor", photo: "" },
+            { name: "Esteban", role: "Constructor", photo: "" }, /*
+            { name: "Sebastián", role: "Constructor", photo: "" }, ¨*/
           ],
         },
         {
           name: "Team Cancha",
           members: [
             { name: "Luis Daniel", role: "Líder de Cancha", photo: "" },
-            { name: "Manu", role: "Constructor", photo: "" },
+            { name: "Luca", role: "Constructor", photo: "" },
+            { name: "Alexis", role: "Constructor", photo: "" },
+            { name: "Mateo", role: "Constructor", photo: "" },
           ],
         },
+        {
+          name: "Rookie Mechanics",
+          members: [
+            { name: "Sebas", role: "Rookie", photo: "" },
+          ],
+        }
       ],
     },
     {
@@ -35,7 +46,10 @@ const TeamPage = () => {
           name: "Equipo Eléctrico",
           members: [
             { name: "Carlos Martínez", role: "Lead Eléctrico", photo: "" },
-            { name: "Charly", role: "Técnico", photo: "" },
+            { name: "Charly", role: "Rookie", photo: "" },
+            { name: "Manu", role: "Rookie", photo: "" },
+            { name: "Abraham", role: "Rookie", photo: "" },
+            { name: "Camilo", role: "Rookie", photo: "" },
           ],
         },
       ],
@@ -57,6 +71,14 @@ const TeamPage = () => {
             { name: "Fernando", role: "Lead de Autonomía", photo: "" },
             { name: "Cami", role: "Desarrolladora", photo: "" },
           ],
+        },
+        {
+          name: "Rookie Programmers",
+          members: [
+            { name: "Carlo", role: "Rookie", photo: "" },
+          ],
+
+
         }
       ],
     },
@@ -84,6 +106,7 @@ const TeamPage = () => {
           members: [
             { name: "Silvana", role: "Lead Redes Sociales", photo: "" },
             { name: "Lu", role: "Media Manager", photo: "" },
+            { name: "Andrew", role: "Content Creator", photo: "" },
           ],
         },
       ],
@@ -113,6 +136,16 @@ const TeamPage = () => {
             { name: "Luis Fernando", role: "Couch", photo: "" },
           ],
         },
+        {
+          name: "Mentores",
+          members: [
+            { name: "Dany Felix", role: "Ex-Couch", photo: "" },
+            { name: "Jorge", role: "Mentor de Negocios", photo: "" },
+            { name: "Gonzalo", role: "Mentor de Mecanica", photo: "" },
+            { name: "Arturo", role: "Mentor de Programación", photo: "" },
+            { name: "Diego Rossi", role: "Mentor de Programación", photo: "" },
+          ]
+        }
       ],
     }
   ];
@@ -132,27 +165,27 @@ const TeamPage = () => {
     >
       {/* Background image */}
       <Box
-  sx={{
-    position: "fixed", // or "absolute" if inside a positioned container
-    top: 0,
-    left: 0,
-    width: "100vw",
-    height: "100vh",
-    zIndex: 0, // put it behind everything
-    overflow: "hidden",
-  }}
->
-  <Box
-    component="img"
-    src={Image}
-    sx={{
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      opacity: 0.45,
-    }}
-  />
-</Box>
+        sx={{
+          position: "fixed", // or "absolute" if inside a positioned container
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          zIndex: 0, // put it behind everything
+          overflow: "hidden",
+        }}
+      >
+        <Box
+          component="img"
+          src={Image}
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            opacity: 0.45,
+          }}
+        />
+      </Box>
 
 
       <Box
