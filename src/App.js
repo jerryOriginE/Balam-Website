@@ -15,6 +15,7 @@ import Box from '@mui/material/Box';
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const ComingSoon = lazy(() => import('./pages/ComingSoon'));
+const PublicTicketLookup = lazy(() => import('./pages/PublicTicketLookup'));
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           <Route path="/sponsors" element={<ComingSoon />} />
           <Route path="/join" element={<JoinUs />} />
           <Route path="/contact" element={<ComingSoon />} />
+          <Route path="/lookup" element={<PublicTicketLookup />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

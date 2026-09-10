@@ -1,166 +1,210 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import balamLogo from '../assets/img/placeholders/balam_logo.svg';
 
-const GlitchText = ({ text, color = '#00BFFF' }) => (
-  <Typography
-    variant="h6"
-    sx={{
-      position: 'relative',
-      display: 'inline-block',
-      fontFamily: 'Orbitron, monospace',
-      fontWeight: 700,
-      color,
-      textShadow: `0 0 10px ${color}, 0 0 20px ${color}`,
-      letterSpacing: 1,
-      animation: 'flicker 2s infinite alternate',
-      '@keyframes flicker': {
-        '0%, 18%, 22%, 25%, 53%, 57%, 100%': { opacity: 1 },
-        '20%, 24%, 55%': { opacity: 0.4 },
-      },
-    }}
-  >
-    {text}
-  </Typography>
-);
-
-export default function BootSequence({ onFinish }) {
-  const [step, setStep] = useState(0);
-  const [exiting, setExiting] = useState(false);
+/* ===============================
+   GLITCH / TYPE TEXT COMPONENT
+================================ */
+const BootText = ({ text, color = '#00BFFF' }) => {
+  const [visibleText, setVisibleText] = useState('');
 
   useEffect(() => {
-    const sequence = [
-      { delay: 700, step: 1 },
-      { delay: 1700, step: 2 },
-      { delay: 2700, step: 3 },
-      { delay: 3700, step: 4 },
-      { delay: 4800, step: 5 },
-    ];
+    let i = 0;
+    const interval = setInterval(() => {
+      setVisibleText(text.slice(0, i));
+      i++;
+      if (i > text.length) clearInterval(interval);
+    }, 35);
 
-    sequence.forEach(({ delay, step }) =>
-      setTimeout(() => setStep(step), delay)
-    );
+    return () => clearInterval(interval);
+  }, [text]);
 
-    const exitTimer = setTimeout(() => {
-      setExiting(true);
-      setTimeout(() => onFinish && onFinish(), 1000);
-    }, 6000);
+  return (
+    <Typography
+      variant="h6"
+      sx={{
+        fontFamily: 'Orbitron, monospace',
+        fontWeight: 700,
+        color,
+        letterSpacing: 1.5,
+        textShadow: `0 0 10px ${color}, 0 0 20px ${color}`,
+        position: 'relative',
+        animation: 'flicker 2.5s infinite',
+        '@keyframes flicker': {
+          '0%, 19%, 22%, 62%, 64%, 100%': { opacity: 1 },
+          '20%, 63%': { opacity: 0.35 },
+        },
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(transparent 60%, rgba(0,255,255,0.08) 62%, transparent 64%)',
+          animation: 'scan 2.5s linear infinite',
+          '@keyframes scan': {
+            '0%': { backgroundPosition: '0 -100%' },
+            '100%': { backgroundPosition: '0 200%' },
+          },
+        },
+      }}
+    >
+      {visibleText}
+    </Typography>
+  );
+};
 
-    return () => clearTimeout(exitTimer);
-  }, [onFinish]);
+/* ===============================
+   BOOT STEPS
+================================ */
+const BOOT_STEPS = [
+  { text: 'Inicializando servidor_balam...' },
+  { text: 'Verificando administradores...' },
+  { text: 'Cargando base de datos...' },
+  { text: 'Sistemas operativos en línea ✅', color: '#00FF7F' },
+  { title: 'BALAM 3527 — ONLINE' },
+];
+
+/* ===============================
+   MAIN COMPONENT
+================================ */
+export default function BootSequence({ onFinish }) {
+  const [stepIndex, setStepIndex] = useState(0);
+  const [exiting, setExiting] = useState(false);
+  const timers = useRef([]);
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion)');
+
+  const finishBoot = () => {
+    if (exiting) return;
+    setExiting(true);
+    setTimeout(() => onFinish?.(), 900);
+  };
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      finishBoot();
+      return;
+    }
+
+    let delay = 700;
+
+    BOOT_STEPS.forEach((_, index) => {
+      const t = setTimeout(() => setStepIndex(index), delay);
+      timers.current.push(t);
+      delay += 900;
+    });
+
+    const endTimer = setTimeout(finishBoot, delay + 600);
+    timers.current.push(endTimer);
+
+    const skipHandler = (e) => e.key === 'Escape' && finishBoot();
+    window.addEventListener('keydown', skipHandler);
+
+    return () => {
+      timers.current.forEach(clearTimeout);
+      window.removeEventListener('keydown', skipHandler);
+    };
+  }, [prefersReducedMotion]);
+
+  const current = BOOT_STEPS[stepIndex];
 
   return (
     <Box
+      onClick={finishBoot}
       sx={{
         position: 'fixed',
         inset: 0,
+        bgcolor: '#000814',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        bgcolor: '#000814',
         zIndex: 9999,
+        cursor: 'pointer',
         overflow: 'hidden',
-        fontFamily: 'Orbitron, monospace',
-        color: '#00BFFF',
       }}
+      aria-label="System boot sequence"
     >
+      {/* LOGO */}
       <motion.img
         src={balamLogo}
         alt="BALAM Logo"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
+        initial={{ opacity: 0, scale: 0.7, rotate: -5 }}
+        animate={{
+          opacity: 1,
+          scale: [1, 1.03, 1],
+          rotate: [0, 1.5, -1.5, 0],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          repeatType: 'mirror',
+          ease: 'easeInOut',
+        }}
         style={{
-          width: 180,
-          marginBottom: '20px',
-          filter: 'drop-shadow(0 0 25px #00BFFF)',
+          width: 190,
+          marginBottom: 26,
+          filter:
+            'drop-shadow(0 0 30px rgba(0,255,255,0.9)) drop-shadow(0 0 60px rgba(0,255,255,0.4))',
         }}
       />
 
+      {/* TEXT */}
       <AnimatePresence mode="wait">
-        {step === 1 && (
-          <motion.div
-            key="boot"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <GlitchText text="Inicializando pagina_balam..." />
-          </motion.div>
-        )}
-        {step === 2 && (
-          <motion.div
-            key="systems"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <GlitchText text="Verificando administradores..." />
-          </motion.div>
-        )}
-        {step === 3 && (
-          <motion.div
-            key="auth"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <GlitchText text="Cargando página..." />
-          </motion.div>
-        )}
-        {step === 4 && (
-          <motion.div
-            key="ready"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <GlitchText text="Sistemas operativos en línea ✅" color="#00FF7F" />
-          </motion.div>
-        )}
-        {step === 5 && (
-          <motion.div
-            key="launch"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+        <motion.div
+          key={stepIndex}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.5 }}
+        >
+          {current?.title ? (
             <Typography
               variant="h4"
               sx={{
+                fontFamily: 'Orbitron, monospace',
                 color: '#00FFFF',
-                textShadow: '0 0 25px #00FFFF',
                 fontWeight: 800,
-                mt: 2,
                 letterSpacing: 2,
+                textShadow: '0 0 30px #00FFFF',
               }}
             >
-              BALAM 3527 — ONLINE
+              {current.title}
             </Typography>
-          </motion.div>
-        )}
+          ) : (
+            <BootText text={current?.text} color={current?.color} />
+          )}
+        </motion.div>
       </AnimatePresence>
 
+      {/* SKIP HINT */}
+      {!exiting && (
+        <Typography
+          variant="caption"
+          sx={{
+            position: 'absolute',
+            bottom: 24,
+            opacity: 0.6,
+            fontFamily: 'Orbitron, monospace',
+            letterSpacing: 1,
+          }}
+        >
+          Click anywhere or press ESC to skip
+        </Typography>
+      )}
+
+      {/* EXIT OVERLAY */}
       {exiting && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          transition={{ duration: 0.8 }}
           style={{
             position: 'absolute',
             inset: 0,
             background:
-              'radial-gradient(circle at center, rgba(0, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.95) 100%)',
+              'radial-gradient(circle at center, rgba(0,255,255,0.18), rgba(0,0,0,0.95))',
             backdropFilter: 'blur(10px)',
-            zIndex: 10000,
           }}
         />
       )}
