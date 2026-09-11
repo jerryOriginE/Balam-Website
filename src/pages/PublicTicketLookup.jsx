@@ -7,7 +7,7 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import BadgeIcon from '@mui/icons-material/Badge';
 import ClearIcon from '@mui/icons-material/Clear';
 
-const API_BASE_URL = 'https://api.balamserver.top/'; //http://localhost:5000
+const API_BASE_URL = 'https://api.balamserver.top'; //http://localhost:5000
 
 const PublicTicketLookup = () => {
   const [identificationNumber, setIdentificationNumber] = useState('');
