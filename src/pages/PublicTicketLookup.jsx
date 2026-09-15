@@ -248,7 +248,7 @@ const PublicTicketLookup = () => {
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                       <ConfirmationNumberIcon sx={{ color: '#00BFFF', fontSize: '1.2rem' }} />
                       <Typography variant="caption" sx={{ color: '#00BFFF', fontFamily: 'Orbitron, sans-serif', fontWeight: 800, letterSpacing: { xs: 1, sm: 2.5 }, fontSize: { xs: '0.6rem', sm: '0.7rem' } }}>
-                        FRC BALAM 3527 • PASE DE ADMISION
+                        BALAM • PASE DE ADMISION
                       </Typography>
                     </Box>
                     <Chip
